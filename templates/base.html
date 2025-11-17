@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        {% block title %}{% endblock %} | Watch that film!
+        {% block title %}{% endblock %} | Give me more Souls
     </title>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
@@ -16,12 +16,33 @@
 
 <body>
     <header id="cabecalho-principal">
-        <a href="{% url 'index' %}"> <img src="{% static 'logo.svg' %}"> </a>
-        <nav id="navegacao-principal">
+
+<!-- ESQUERDA: logo + nome -->
+    <div id="grupo-esquerda">
+            <img src="{% static 'icon_simb-removebg-preview.png' %}" id="logo_principal">
+
+        <nav id="ICarus_nome">
             <ul>
-                <li><a href="{% url 'about' %}">Sobre</a></li>
+                <li><a href="{% url 'index' %}"><img src="{% static 'souls_likes_im-removebg-preview.png' %}"></a></li>
             </ul>
         </nav>
+    </div>
+
+    <!-- CENTRO: menu principal -->
+    <nav id="menu-centro">
+        <ul>
+            <li><a href="{% url 'index' %}">Início</a></li>
+            <li><a href="{% url 'about' %}">Sobre</a></li>
+            <li><a href="#">Projetos</a></li>
+        </ul>
+    </nav>
+
+    <!-- DIREITA: Login -->
+    <nav id="menu-direita">
+        <ul>
+            <li><a href="#">Login</a></li>
+        </ul>
+    </nav>
 
     </header>
     <main id="conteiner-principal">

@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
-Página Inicial
+O inicio da jornada
 {% endblock title %}
 
 {% block content %}
-<h1><i>Watch that film!</i></h1>
-<p>A Página para Comunidade Resenhadora de Filmes</p>
+<h1 style="position: relative;font-family: 'Cinzel', serif;"><i>Info Souls like</i></h1>
+<p style="position: relative; font-family: 'Cinzel', serif;"">A Página para Comunidade de fãs de jogos desafiadores com curiosidades e dicas</p>
+
+
+
+<div id="index-bg" style="background-image: url('{% static 'wp.png' %}');"></div>
+
 {% endblock content %}

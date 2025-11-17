@@ -19,17 +19,178 @@
 html,
 body, #root {
   height: 100%;
+  margin: 0;
 }
-
+/*========================*/
+/* Cabeçalho              */
+/*========================*/
 header#cabecalho-principal {
   margin: 0 auto;
   width: 100%;
-  max-width: 1080px;
-  padding: 3rem 1rem;
-
+  padding: 0.2rem 1.5rem;
+  background:black;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  box-shadow: 0 4px 10px -2px orange;
+}
+
+#logo_principal {
+
+  width: 70px;
+  height: auto;
+}
+
+#grupo-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 0rem;   /* <-- ajuste aqui a distância entre logo e nome */
+}
+#grupo-esquerda img{
+    height: 75px;
+    width: auto; 
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+#menu-centro a{
+  color: white;
+}
+
+#menu-centro ul {
+    display: flex;         /* itens em linha */
+    gap: 5rem;             /* espaço entre os botões */
+    list-style: none;      /* remove bolinhas */
+    padding: 0;
+    margin: 0;
+}
+
+#menu-direita a {
+    all: unset;                /* remove estilos herdados */
+    cursor: pointer;
+    font-family: "Cinzel", serif;   /* tipografia estilo souls (se tiver) */
+    color: #d47a1e;            /* laranja queimado */
+    font-size: 1.1rem;
+    padding: 8px 18px;
+    border: 1px solid #d47a1e; 
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    display: inline-block;
+    position: relative;
+
+    transition: 
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* HOVER — brilho laranja com toque dramático */
+#menu-direita a:hover {
+    color: #ffb25c;
+    border-color: #ffb25c;
+    box-shadow: 0 0 12px #ffb25c, inset 0 0 8px #ffb25c;
+    transform: scale(1.05);
+}
+
+/* PRESS — leve afundada, estilo clique pesado */
+#menu-direita a:active {
+    transform: scale(0.97);
+    box-shadow: 0 0 6px #ffb25c inset;
+}
+
+#menu-direita ul{
+    display: flex;         /* itens em linha */
+    list-style: none;      /* remove bolinhas */
+    padding: 0;
+    margin: 0;
+}
+
+#ICarus_nome a{
+  color: white;
+  font-size: 2rem;
+}
+
+#ICarus_nome ul{
+  list-style: none;
+}
+
+#menu-centro ul {
+    list-style: none;
+    display: flex;         /* itens em linha */
+    gap: 5rem;             /* espaço entre os botões */
+    list-style: none;      /* remove bolinhas */
+    padding: 0;
+    margin: 0;
+}
+
+#menu-centro a {
+  
+    position: relative;
+    text-decoration: none;
+    padding: 5px 0;        /* espaço p/ a linha aparecer */
+    color: white;
+}
+
+/* Pseudo-elemento da linha */
+#menu-centro a::after {
+    content: "";
+    position: absolute;
+    left: 50%;             /* começa no centro */
+    bottom: -2px;          /* logo abaixo do texto */
+    width: 0;              /* começa sem tamanho */
+    height: 3px;           /* espessura da linha */
+    background: orange;
+    box-shadow: 0 0 10px 3px orange; /* sombra forte */
+    transition: all 0.25s ease-out;
+    transform: translateX(-50%); /* ancora no centro */
+}
+
+/* Efeito ao passar o mouse */
+#menu-centro a:hover::after {
+    width: 100%;           /* cresce até ocupar todo o botão */
+}
+/* GRUPO ESQUERDA – logo + nome */
+#grupo-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;            /* espaço ajustável entre as duas imagens */
+}
+
+/* LOGO (imagem esquerda) */
+#logo_principal {
+    height: 75px;           /* ajuste fino ao seu gosto */
+    width: auto;
+    object-fit: contain;
+}
+
+/* NOME (imagem direita dentro do <a>) */
+#ICarus_nome img {
+    height: 75px;           /* proporcional ao logo */
+    width: auto;
+    object-fit: contain;
+    transition: 
+        filter 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* HOVER estilo Souls – brilho laranja leve */
+#ICarus_nome img:hover {
+    filter: drop-shadow(0 0 6px #ff9e3d);
+    transform: scale(1.05);     /* pequeno aumento, elegante */
+    box-shadow: 0 0 10px #ff9e3d inset;
+}
+#index-bg {
+    height: 500px;               /* altura do banner */
+    background-size: cover;      /* cobre o div inteiro */
+    background-position: center; /* centraliza a imagem */
+    background-repeat: no-repeat;
+    margin-top: 2rem;
+    border-radius: 10px;         /* opcional, deixa bonito */
+    position: relative;
 }
 
 li a {
@@ -38,14 +199,10 @@ li a {
   text-decoration: none;
 }
 
-li a:hover {
-  color: var(--secondary-color-light);
-  text-decoration: underline;
-}
-
 body, #root {
   display: flex;
   flex-direction: column;
+  background-color: black;
 }
 
 nav#navegacao-principal li {
@@ -59,15 +216,37 @@ main#conteiner-principal {
   max-width: 1080px;
   padding: 1rem 1rem;
   flex-grow: 1;
+  color: white;
+}
+#rodape-principal {
+    width: 100%;
+    padding: 1.5rem 0;
+    background: black;                       /* igual ao header */
+    
+    position: relative;
+
+    /* SOMBRA FIXA LARANJA NO TOPO — igual ao header porém invertida */
+    box-shadow: 0 -4px 10px -2px orange;
+
+    /* Linha laranja igual ao header */
+    border-top: 2px solid orange;
+
+    text-align: center;
+    margin-top: 3rem;
 }
 
-footer#rodape-principal {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 1rem;
+#rodape-principal p {
+    margin: 0;
 }
+
+#rodape-principal small {
+    color: white;                            /* igual aos textos do header */
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.3);  /* brilho leve laranja */
+}
+
+
 
 .lista-de-cards {
   display: flex;
@@ -98,16 +277,6 @@ footer#rodape-principal {
 
 .small-card img {
   width: 100%;
-}
-
-a {
-  color: var(--secondary-color);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--secondary-color-light);
-  text-decoration: underline;
 }
 
 .dados-de-filme {
@@ -153,3 +322,4 @@ button:hover {
   background-color: var(--secondary-color-light);
   border: 2px solid var(--secondary-color-light);
 }
+
