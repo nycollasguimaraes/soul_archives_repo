@@ -7,6 +7,10 @@
 {% block content %}
 <h2>Detalhes do Jogo {{ game.name }} ({{ game.release_year }})</h2>
 
+<p>
+    <a href="{% url 'secoes:category-list' %}">Categorias</a>
+</p>
+
 <section class="dados-de-filme">
   <img src="{{ game.poster_url }}" alt="Wallpaper do jogo: {{ game.name}}" />
   <ul>
@@ -33,5 +37,18 @@
 <p>
     <a href="{% url 'secoes:comment-create' game.id %}">Adicionar comentário</a>
 </p>
+
+<h3>Categorias</h3>
+{% if game.categories.all %}
+    <ul>
+    {% for category in game.categories.all %}
+        <li>
+            <a href="{% url 'secoes:category-detail' category.id %}">{{ category.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Este jogo não possui categorias.</p>
+{% endif %}
 
 {% endblock content %}

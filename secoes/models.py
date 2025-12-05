@@ -3,11 +3,18 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 # Create your models here.
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
 
 class Game(models.Model):
     name = models.CharField(max_length=200)
-    release_year = models.IntegerField()
+    release_year = models.PositiveIntegerField()
     poster_url = models.URLField()
+    categories = models.ManyToManyField(Category, related_name='games', blank=True)
 
     def __str__(self):
         return self.name

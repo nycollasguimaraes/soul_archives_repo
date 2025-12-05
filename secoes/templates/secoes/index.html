@@ -20,7 +20,17 @@
        <a class="card-link" href="{% url 'secoes:detail' game.pk %}">
             <img src="{{ game.poster_url }}" alt="Poster do game {{ game.name }}">
             <p>{{ game.name }} ({{ game.release_year }})</p>
+
+            <!-- CATEGORIAS DO JOGO -->
+            <p>
+                {% for category in game.categories.all %}
+                    {{ category.name }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    Nenhuma categoria
+                {% endfor %}
+            </p>
        </a>
+
        <p>
            <a href="{% url 'secoes:update' game.pk %}">Editar</a> |
            <a href="{% url 'secoes:delete' game.pk %}">Excluir</a>

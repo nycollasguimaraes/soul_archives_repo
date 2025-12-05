@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Categorias</h2>
+<p>Clique em uma para ver os jogos associados:</p>
+{% if categories %}
+<ul>
+    {% for category in categories %}
+    <li>
+        <a href="{% url 'secoes:category-detail' category.id %}">{{ category.name }}</a>
+        - {{ category.description }}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Nenhuma categoria cadastrada.</p>
+{% endif %}
+{% endblock content %}

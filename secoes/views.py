@@ -2,7 +2,7 @@ from .temp_data import game_data
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Comment, Game
+from .models import Comment, Game, Category
 from django.views.generic.edit import CreateView
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
@@ -59,3 +59,13 @@ class CommentCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('secoes:detail', kwargs={'pk': self.kwargs['pk']})
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'secoes/category_list.html'
+    context_object_name = 'categories'
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'secoes/category_detail.html'
+    context_object_name = 'category'

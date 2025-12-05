@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Categoria: {{ category.name }}</h2>
+<p>{{ category.description }}</p>
+
+{% if category.games.all %}
+<section class="lista-de-cards">
+    {% for game in category.games.all %}
+    <article class="card">
+       <a class="card-link" href="{% url 'secoes:detail' game.id %}">
+            <img src="{{ game.poster_url }}" alt="Poster do jogo {{ game.name }}">
+            <p>{{ game.name }} ({{ game.release_year }})</p>
+       </a>
+    </article>
+    {% endfor %}
+</section>
+{% else %}
+<p>Nenhum jogo cadastrado nesta categoria.</p>
+{% endif %}
+{% endblock content %}

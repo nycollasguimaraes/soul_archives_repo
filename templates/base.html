@@ -17,32 +17,32 @@
 <body>
     <header id="cabecalho-principal">
 
-<!-- ESQUERDA: logo + nome -->
-    <div id="grupo-esquerda">
+        <!-- ESQUERDA: logo + nome -->
+        <div id="grupo-esquerda">
             <img src="{% static 'icon_simb-removebg-preview.png' %}" id="logo_principal">
 
-        <nav id="ICarus_nome">
+            <nav id="ICarus_nome">
+                <ul>
+                    <li><a href="{% url 'index' %}"><img src="{% static 'souls_likes_im-removebg-preview.png' %}"></a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- CENTRO: menu principal -->
+        <nav id="menu-centro">
             <ul>
-                <li><a href="{% url 'index' %}"><img src="{% static 'souls_likes_im-removebg-preview.png' %}"></a></li>
+                <li><a href="{% url 'index' %}">Início</a></li>
+                <li><a href="{% url 'secoes:index' %}">Fóruns</a></li>
+                <li><a href="{% url 'secoes:category-list' %}">Categorias</a></li> <!-- Link adicionado -->
             </ul>
         </nav>
-    </div>
 
-    <!-- CENTRO: menu principal -->
-    <nav id="menu-centro">
-        <ul>
-            <li><a href="{% url 'index' %}">Início</a></li>
-            <li><a href="{% url 'secoes:index' %}">Fóruns</a></li>
-            <li><a href="{% url 'about' %}">Sobre</a></li>
-        </ul>
-    </nav>
-
-    <!-- DIREITA: Login -->
-    <nav id="menu-direita">
-        <ul>
-            <li><a href="#">Login</a></li>
-        </ul>
-    </nav>
+        <!-- DIREITA: Login -->
+        <nav id="menu-direita">
+            <ul>
+                <li><a href="{% url 'about' %}">Login</a></li>
+            </ul>
+        </nav>
 
     </header>
     <main id="conteiner-principal">
