@@ -17,10 +17,14 @@
 <section class="lista-de-cards">
     {% for game in game_list %}
     <article class="card">
-       <a class="card-link" href="{% url 'secoes:detail' forloop.counter %}">
-        <img src="{{ game.poster_url }}" alt="Poster do game {{ game.name }}">
-        <p>{{ game.name }} ({{ game.release_year }})</p>
-        </a>
+       <a class="card-link" href="{% url 'secoes:detail' game.id %}">
+            <img src="{{ game.poster_url }}" alt="Poster do game {{ game.name }}">
+            <p>{{ game.name }} ({{ game.release_year }})</p>
+       </a>
+       <p>
+           <a href="{% url 'secoes:update' game.id %}">Editar</a> |
+           <a href="{% url 'secoes:delete' game.id %}">Excluir</a>
+       </p>
     </article>
     {% endfor %}
 </section>

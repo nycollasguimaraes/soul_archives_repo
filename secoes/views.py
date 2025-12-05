@@ -36,3 +36,33 @@ def create_game(request):
         )
     else:
         return render(request, 'secoes/create.html', {})
+
+def update_game(request, game_id):
+    game = game_data[game_id - 1]  # pega o game existente
+
+    if request.method == "POST":
+        # Atualiza os campos do game
+        game["name"] = request.POST["name"]
+        game["release_year"] = request.POST["release_year"]
+        game["poster_url"] = request.POST["poster_url"]
+
+        return HttpResponseRedirect(reverse("secoes:detail", args=(game_id,)))
+    else:
+        # Renderiza formulário preenchido com os dados atuais
+        context = {"game": game}
+        return render(request, "secoes/update.html", context)
+
+def delete_game(request, game_id):
+    if request.method == "POST":
+        # Remove o game da lista
+        game_data.pop(game_id - 1)
+
+        # Reorganiza os IDs
+        for i, g in enumerate(game_data):
+            g["id"] = str(i + 1)
+
+        return HttpResponseRedirect(reverse("secoes:index"))
+    else:
+        # Confirmação de exclusão
+        game = game_data[game_id - 1]
+        return render(request, "secoes/delete.html", {"game": game})
