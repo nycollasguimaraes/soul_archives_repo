@@ -1,5 +1,10 @@
-{% extends 'base.html' %} {% block title %} {{ game.name }} ({{
-game.release_year }} {% endblock title %} {% block content %}
+{% extends 'base.html' %}
+
+{% block title %}
+{{ game.name }} ({{ game.release_year }})
+{% endblock title %}
+
+{% block content %}
 <h2>Detalhes do Jogo {{ game.name }} ({{ game.release_year }})</h2>
 
 <section class="dados-de-filme">
@@ -9,5 +14,24 @@ game.release_year }} {% endblock title %} {% block content %}
     <li>Ano de Lançamento: {{ game.release_year }}</li>
   </ul>
 </section>
+
+<h3>Comentários</h3>
+{% if game.comments.all %}
+    <ul>
+    {% for comment in game.comments.all %}
+        <li>
+            <strong>{{ comment.author.username }}</strong>
+            ({{ comment.created_at|date:"d/m/Y H:i" }}):<br>
+            {{ comment.text }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Não há comentários ainda.</p>
+{% endif %}
+
+<p>
+    <a href="{% url 'secoes:comment-create' game.id %}">Adicionar comentário</a>
+</p>
 
 {% endblock content %}

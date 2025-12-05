@@ -2,7 +2,11 @@ from .temp_data import game_data
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Game
+from .models import Comment, Game
+from django.views.generic.edit import CreateView
+from django.urls import reverse
+from django.shortcuts import get_object_or_404
+
 
 class GameListView(ListView):
     model = Game
@@ -40,3 +44,18 @@ def search_games(request):
             ]
         }
     return render(request, 'secoes/search.html', context)
+
+class CommentCreateView(CreateView):
+    model = Comment
+    fields = ['text']
+    template_name = 'secoes/create_comment.html'
+
+    def form_valid(self, form):
+        # Aqui pegamos o game pelo pk da URL
+        game = get_object_or_404(Game, pk=self.kwargs['pk'])
+        form.instance.post = game        # atribui o post
+        form.instance.author = self.request.user  # atribui o autor logado
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('secoes:detail', kwargs={'pk': self.kwargs['pk']})
