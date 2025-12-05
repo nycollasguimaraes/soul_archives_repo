@@ -3,6 +3,7 @@ from .temp_data import game_data
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .forms import GameForm
 
 def detail_game(request, game_id):
     context = {'game': game_data[game_id - 1]}
@@ -23,34 +24,39 @@ def search_games(request):
         }
     return render(request, 'secoes/search.html', context)
 
+
 def create_game(request):
-    if request.method == 'POST':
-        game_data.append({
-            'id': str(len(game_data) + 1),
-            'name': request.POST['name'],
-            'release_year': request.POST['release_year'],
-            'poster_url': request.POST['poster_url']
-        })
-        return HttpResponseRedirect(
-            reverse('secoes:detail', args=(len(game_data),))
-        )
+    if request.method == "POST":
+        form = GameForm(request.POST)
+        if form.is_valid():
+            game_data.append({
+                "id": str(len(game_data) + 1),
+                "name": form.cleaned_data["name"],
+                "release_year": form.cleaned_data["release_year"],
+                "poster_url": form.cleaned_data["poster_url"]
+            })
+            return HttpResponseRedirect(reverse("secoes:detail", args=(len(game_data),)))
     else:
-        return render(request, 'secoes/create.html', {})
+        form = GameForm()
+    return render(request, "secoes/create.html", {"form": form})
 
 def update_game(request, game_id):
-    game = game_data[game_id - 1]  # pega o game existente
-
+    game = game_data[game_id - 1]
     if request.method == "POST":
-        # Atualiza os campos do game
-        game["name"] = request.POST["name"]
-        game["release_year"] = request.POST["release_year"]
-        game["poster_url"] = request.POST["poster_url"]
-
-        return HttpResponseRedirect(reverse("secoes:detail", args=(game_id,)))
+        form = GameForm(request.POST)
+        if form.is_valid():
+            game["name"] = form.cleaned_data["name"]
+            game["release_year"] = form.cleaned_data["release_year"]
+            game["poster_url"] = form.cleaned_data["poster_url"]
+            return HttpResponseRedirect(reverse("secoes:detail", args=(game_id,)))
     else:
-        # Renderiza formulário preenchido com os dados atuais
-        context = {"game": game}
-        return render(request, "secoes/update.html", context)
+        form = GameForm(initial={
+            "name": game["name"],
+            "release_year": game["release_year"],
+            "poster_url": game["poster_url"]
+        })
+    return render(request, "secoes/update.html", {"form": form, "game": game})
+
 
 def delete_game(request, game_id):
     if request.method == "POST":
