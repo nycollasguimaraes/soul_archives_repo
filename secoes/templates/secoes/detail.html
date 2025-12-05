@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block title %} {{ game.name }} ({{
+game.release_year }} {% endblock title %} {% block content %}
+<h2>Detalhes do Jogo {{ game.name }} ({{ game.release_year }})</h2>
+
+<section class="dados-de-filme">
+  <img src="{{ game.poster_url }}" alt="Wallpaper do jogo: {{ game.name}}" />
+  <ul>
+    <li>Nome: {{ game.name }}</li>
+    <li>Ano de Lançamento: {{ game.release_year }}</li>
+  </ul>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Busca de Games por Nome</h2>
+<form action="{% url 'secoes:search' %}">
+    <p>
+        <label for="id_query">Nome:</label>
+        <input type="text" name="query" id="id_query" />
+    </p>
+    <button type="submit">Buscar</button>
+</form>
+
+<h2>Resultado da Busca</h2>
+{% if game_list %}
+<section class="lista-de-cards">
+    {% for game in game_list %}
+    <article class="card">
+        <a class="card-link" href="{% url 'secoes:detail' forloop.counter %}">
+        <img src="{{ game.poster_url }}" alt="Poster do game {{ game.name }}">
+        <p>{{ game.name }} ({{ game.release_year }})</p>
+        </a>
+
+    </article>
+    {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhum game para a busca.</p>
+{% endif %}
+
+{% endblock content %}

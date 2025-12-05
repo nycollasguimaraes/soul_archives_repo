@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Todos os Games</h2>
+
+<section>
+  <p>
+    Muitos resultados? <a href="{% url 'secoes:search' %}">Buscar Games</a>
+  </p>
+  <p>
+    Não encontrou o game?
+    <a href="{% url 'secoes:create' %}">Adicionar Novo Game</a>
+  </p>
+</section>
+
+{% if game_list %}
+<section class="lista-de-cards">
+    {% for game in game_list %}
+    <article class="card">
+       <a class="card-link" href="{% url 'secoes:detail' forloop.counter %}">
+        <img src="{{ game.poster_url }}" alt="Poster do game {{ game.name }}">
+        <p>{{ game.name }} ({{ game.release_year }})</p>
+        </a>
+    </article>
+    {% endfor %}
+</section>
+{% else %}
+<p>Nenhum game cadastrado.</p>
+{% endif %}
+
+{% endblock content %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'staticpages.apps.StaticpagesConfig',
+    'secoes.apps.SecoesConfig',
 ]
 
 MIDDLEWARE = [
