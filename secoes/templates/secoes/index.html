@@ -17,13 +17,13 @@
 <section class="lista-de-cards">
     {% for game in game_list %}
     <article class="card">
-       <a class="card-link" href="{% url 'secoes:detail' game.id %}">
+       <a class="card-link" href="{% url 'secoes:detail' game.pk %}">
             <img src="{{ game.poster_url }}" alt="Poster do game {{ game.name }}">
             <p>{{ game.name }} ({{ game.release_year }})</p>
        </a>
        <p>
-           <a href="{% url 'secoes:update' game.id %}">Editar</a> |
-           <a href="{% url 'secoes:delete' game.id %}">Excluir</a>
+           <a href="{% url 'secoes:update' game.pk %}">Editar</a> |
+           <a href="{% url 'secoes:delete' game.pk %}">Excluir</a>
        </p>
     </article>
     {% endfor %}
